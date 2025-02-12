@@ -27,4 +27,10 @@ public class UserService {
         return user.map(UserResponse::new)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    public void deleteUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userRepository.delete(user);
+    }
 }
