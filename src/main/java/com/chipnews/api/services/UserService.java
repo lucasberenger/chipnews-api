@@ -2,6 +2,7 @@ package com.chipnews.api.services;
 
 import com.chipnews.api.dtos.UserRequest;
 import com.chipnews.api.dtos.UserResponse;
+import com.chipnews.api.dtos.UserUpdateRequest;
 import com.chipnews.api.entities.User;
 import com.chipnews.api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
+    //TODO: Create custom exception for User not found!!
 
     @Autowired
     private UserRepository userRepository;
@@ -46,9 +49,23 @@ public class UserService {
         return new UserResponse(user);
     }
 
+    @Transactional
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public UserResponse updateUserById(Long id, UserUpdateRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setAddress(request.getAddress());
+
+        userRepository.save(user);
+        return new UserResponse(user);
     }
 }
