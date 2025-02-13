@@ -1,5 +1,6 @@
 package com.chipnews.api.controllers;
 
+import com.chipnews.api.dtos.UserRequest;
 import com.chipnews.api.dtos.UserResponse;
 import com.chipnews.api.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +30,13 @@ public class UserController {
     @Operation(summary = "Get user by id", description = "Return user by id")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         UserResponse user = service.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping
+    @Operation(summary = "Create user", description = "Create user")
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
+        UserResponse user = service.createUser(request);
         return ResponseEntity.ok(user);
     }
 
