@@ -53,13 +53,6 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUserById(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        userRepository.delete(user);
-    }
-
-    @Transactional
     public UserResponse updateUserById(Long id, UserUpdateRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -69,5 +62,12 @@ public class UserService {
 
         userRepository.save(user);
         return new UserResponse(user);
+    }
+
+    @Transactional
+    public void deleteUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userRepository.delete(user);
     }
 }
