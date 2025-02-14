@@ -6,6 +6,7 @@ import com.chipnews.api.dtos.UserUpdateRequest;
 import com.chipnews.api.entities.User;
 import com.chipnews.api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,10 +41,12 @@ public class UserService {
     @Transactional
     public UserResponse createUser(UserRequest request) {
         User user = new User();
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        BeanUtils.copyProperties(request, user);
+        // TODO: Treat the case when some field is null.
+
+        if (request.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
 
         userRepository.save(user);
         return new UserResponse(user);
@@ -60,10 +63,9 @@ public class UserService {
     public UserResponse updateUserById(Long id, UserUpdateRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setAddress(request.getAddress());
+
+        // TODO: Treat the case when some field is null.
+        BeanUtils.copyProperties(request, user);
 
         userRepository.save(user);
         return new UserResponse(user);
