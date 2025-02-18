@@ -12,20 +12,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    restart: always
 
   db:
-    image: mysql
+    image: postgres:16-alpine3.20
     ports:
-      - "3306:3306"
+      - "5432:5432"
     expose:
-      - "3306"
-    environment:
-        MYSQL_ROOT_PASSWORD: test
-        MYSQL_DATABASE: test
-        MYSQL_USER: test
-        MYSQL_PASSWORD: test
+      - "5432"
+    env_file:
+      - ".env"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: [ "CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
       retries: 5
       timeout: 5s
