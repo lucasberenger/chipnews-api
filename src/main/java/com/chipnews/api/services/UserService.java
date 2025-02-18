@@ -47,7 +47,8 @@ public class UserService {
         String email = request.getEmail();
         Optional<User> existingEmail = userRepository.findByEmail(email);
         if (existingEmail.isPresent()) {
-            throw new RuntimeException(String.format("Email already taken: '%' ", email));
+            throw new RuntimeException(String.format("Email already taken: '%s' ", email));
+            // TODO: Create a custom Exception to this one!
         }
 
         BeanUtils.copyProperties(request, user);
