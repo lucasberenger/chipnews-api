@@ -43,6 +43,13 @@ public class UserService {
     @Transactional
     public UserResponse createUser(UserRequest request) {
         User user = new User();
+
+        String email = request.getEmail();
+        Optional<User> existingEmail = userRepository.findByEmail(email);
+        if (existingEmail.isPresent()) {
+            throw new RuntimeException(String.format("Email already taken: '%' ", email));
+        }
+
         BeanUtils.copyProperties(request, user);
         // TODO: Treat the case when some field is null.
 
@@ -72,4 +79,5 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
     }
+
 }
