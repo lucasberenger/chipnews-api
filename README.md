@@ -1,6 +1,6 @@
 # ChipNews API 📡
 
-Bem-vindo à **ChipNews API**, o backend que fornece funcionalidades para gerenciar informações de clientes, planos contratados e pagamentos no serviço de TV por assinatura. Esta API foi desenvolvida utilizando **Spring Boot** 🍃 e **MySQL** 🐬, garantindo desempenho, escalabilidade e facilidade de integração com o aplicativo frontend.
+Bem-vindo à **ChipNews API**, o backend que fornece funcionalidades para gerenciar informações de clientes, planos contratados e pagamentos no serviço de TV por assinatura. Esta API foi desenvolvida utilizando **Spring Boot** 🍃 e **PostgreSQL** 🐘, garantindo desempenho, escalabilidade e facilidade de integração com o aplicativo frontend.
 
 ---
 
@@ -26,8 +26,8 @@ A API oferece os seguintes recursos:
 ## 🚀 Tecnologias Utilizadas
 
 - **Backend**: [Spring Boot](https://spring.io/projects/spring-boot) 🍃
-- **Banco de Dados**: [MySQL](https://www.mysql.com/) 🐬
-- **Documentação da API**: [Swagger](https://swagger.io/) 📜 (geração automática)
+- **Banco de Dados**: [PostgreSQL](https://www.postgresql.org/) 🐘
+- **Documentação da API**: [Swagger](https://swagger.io/) 📜 
 - **Segurança**: Spring Security com autenticação JWT 🔒
 
 ---
