@@ -25,6 +25,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+
     public List<UserResponse> getUsers() {
         return userRepository.findAll()
                 .stream()
@@ -41,8 +43,16 @@ public class UserService {
     @Transactional
     public UserResponse createUser(UserRequest request) {
         User user = new User();
+
+        String email = request.getEmail();
+        Optional<User> existingEmail = userRepository.findByEmail(email);
+        if (existingEmail.isPresent()) {
+            throw new RuntimeException(String.format("Email already taken: '%s' ", email));
+            // TODO: Create a custom Exception to this one!
+        }
+
         BeanUtils.copyProperties(request, user);
-        // TODO: Treat the case when some field is null.
+        // TODO: Treat the case when some field is null. just add @Notnull in the dto
 
         if (request.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -70,4 +80,5 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
     }
+
 }
