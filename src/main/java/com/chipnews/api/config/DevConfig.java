@@ -26,10 +26,10 @@ public class DevConfig implements CommandLineRunner {
 
 
         // Creates a test user
-        User test = new User(null, "Usuário", "email@io.com", "121231313", "Endereço - 1", null);
-        test.setPassword(passwordEncoder.encode("test"));
-
-        userRepository.save(test);
+//        User test = new User(null, "Usuário", "email@io.com", "121231313", "Endereço - 1", null);
+//        test.setPassword(passwordEncoder.encode("test"));
+//
+//        userRepository.save(test);
     }
 
 
