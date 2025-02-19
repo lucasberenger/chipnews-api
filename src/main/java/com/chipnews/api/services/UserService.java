@@ -52,7 +52,7 @@ public class UserService {
         }
 
         BeanUtils.copyProperties(request, user);
-        // TODO: Treat the case when some field is null.
+        // TODO: Treat the case when some field is null. just add @Notnull in the dto
 
         if (request.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
