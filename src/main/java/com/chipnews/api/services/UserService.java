@@ -40,6 +40,12 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public UserResponse getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.map(UserResponse::new)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     @Transactional
     public UserResponse createUser(UserRequest request) {
         User user = new User();
