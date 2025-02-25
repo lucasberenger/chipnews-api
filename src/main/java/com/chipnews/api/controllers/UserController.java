@@ -8,12 +8,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @Tag(name = "User", description = "User Management")
 public class UserController {
 
@@ -52,5 +53,14 @@ public class UserController {
     @Operation(summary = "Delete user by id", description = "Delete user by id")
     public void deleteUserById(@PathVariable Long id) {
         service.deleteUserById(id);
+    }
+
+
+    @GetMapping("/me")
+    @Operation(summary = "User info", description = "Show authenticated user info")
+    public ResponseEntity<UserResponse> home(Authentication authentication) {
+        String email = authentication.getName();
+        UserResponse user = service.getUserByEmail(email);
+        return ResponseEntity.ok(user);
     }
 }
