@@ -63,4 +63,12 @@ public class UserController {
         UserResponse user = service.getUserByEmail(email);
         return ResponseEntity.ok(user);
     }
+
+    @PatchMapping("/me")
+    public ResponseEntity<UserResponse> updateUserData(Authentication authentication, @RequestBody UserUpdateRequest request) {
+        String email = authentication.getName();
+
+        UserResponse user = service.updateUserByEmail(email, request);
+        return ResponseEntity.ok(user);
+    }
 }
