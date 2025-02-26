@@ -81,6 +81,17 @@ public class UserService {
     }
 
     @Transactional
+    public UserResponse updateUserByEmail(String email, UserUpdateRequest request) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        BeanUtils.copyProperties(request, user);
+
+        userRepository.save(user);
+        return new UserResponse(user);
+    }
+
+    @Transactional
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
