@@ -9,8 +9,6 @@ public class UserResponse {
     private String name;
     private String email;
     private String phone;
-    private String address;
-    // TODO: once the Package entity is created, add missing field.
 
     public UserResponse(User user) {
         BeanUtils.copyProperties(user, this);
@@ -51,11 +49,4 @@ public class UserResponse {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

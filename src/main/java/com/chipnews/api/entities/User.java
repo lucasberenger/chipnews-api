@@ -17,20 +17,17 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String phone;
-    private String address;
     private String password;
-    // TODO: once the Package entity is created, add the relationship here!!
 
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, String address, String password) {
+    public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.address = address;
         this.password = password;
     }
 
@@ -74,13 +71,7 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     @Override
     public boolean equals(Object o) {

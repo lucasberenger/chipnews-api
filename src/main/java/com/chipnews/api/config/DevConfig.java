@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Arrays;
-
 @Configuration
 @Profile("dev")
 public class DevConfig implements CommandLineRunner {
@@ -26,7 +24,7 @@ public class DevConfig implements CommandLineRunner {
 
 
         // Creates a test user
-//        User test = new User(null, "Test da Silva", "test@io.com", "121231313", "Endereço - 1", null);
+//        User test = new User(null, "Carlos da Silva", "carlos@gmail.com","219676523", null);
 //        test.setPassword(passwordEncoder.encode("test"));
 //
 //        userRepository.save(test);

@@ -65,6 +65,7 @@ public class UserController {
     }
 
     @PatchMapping("/me")
+    @Operation(summary = "Update User Info", description = "Update user data")
     public ResponseEntity<UserResponse> updateUserData(Authentication authentication, @RequestBody UserUpdateRequest request) {
         String email = authentication.getName();
 

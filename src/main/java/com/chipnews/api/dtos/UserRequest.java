@@ -5,7 +5,6 @@ public class UserRequest {
     private String name;
     private String email;
     private String phone;
-    private String address;
     private String password;
 
     public String getName() {
@@ -30,14 +29,6 @@ public class UserRequest {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPassword() {
